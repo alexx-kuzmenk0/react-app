@@ -53,7 +53,7 @@ const PizzaBlock = ({title, price, imageUrl, sizes, types}) => {
 								fill="white"
 							/>
 						</svg>
-						<span>Добавить</span>
+						<span>Add</span>
 						<i>0</i>
 					</div>
 				</div>
