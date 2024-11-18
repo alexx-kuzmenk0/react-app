@@ -9,12 +9,12 @@ const Categories = () => {
 		dispatch(setCategoryId(id));
 	}
 	const categories = [
-		'Всё',
-		'Мясные',
-		'Вегетарианские',
-		'Гриль',
-		'Острые',
-		'Закрытые'
+		'All',
+		'Meat',
+		'Vegan',
+		'Grill',
+		'Spicy',
+		'Closed'
 	]
 
 

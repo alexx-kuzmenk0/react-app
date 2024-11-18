@@ -37,7 +37,7 @@ const Search = () => {
 			<input ref={inputRef}
 				   value={value}
 				   onChange={onChangeInput}
-				   className={styles.input} placeholder="Поиск Пиццы..."/>
+				   className={styles.input} placeholder="Pizza Search..."/>
 
 			{value &&
 				<svg onClick={onClickClear}

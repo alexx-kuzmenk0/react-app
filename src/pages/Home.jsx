@@ -10,7 +10,6 @@ import Pagination from "../components/Pagination/index.jsx";
 import {SearchContext} from "../App.jsx";
 import axios from "axios";
 import qs from "qs";
-import sort from "../components/Sort.jsx";
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -22,18 +21,7 @@ const Home = () => {
 	const [items, setItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const {searchValue,} = useContext(SearchContext);
-	useEffect(() => {
-		if(window.location.search){
-			const params = qs.parse(window.location.search.substring(1));
-			const sortList = sort.find(obj => obj.sortProperty === params.sortProperty);
-			dispatch(
-				setFilters({
-					...params,
-					sort
-				})
-			)
-		}
-	},[])
+
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -67,7 +55,7 @@ const Home = () => {
 				<Categories/>
 				<Sort/>
 			</div>
-			<h2 className="content__title">Все пиццы</h2>
+			<h2 className="content__title">All Pizzas</h2>
 			<div className="content__items">
 				{isLoading ? skeletons : (items.length ? pizzas : <p>No pizzas found</p>)}
 			</div>
