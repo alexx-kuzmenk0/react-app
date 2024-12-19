@@ -15,6 +15,7 @@ const Home = () => {
 	const [items, setItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const isSearch = useRef(false);
+	const isMounted = useRef(false);
 	const {searchValue,} = useContext(SearchContext);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -37,19 +38,21 @@ const Home = () => {
 	};
 	useEffect(() => {
 		if (window.location.search) {
-			const params  = qs.parse(window.location.search.substring(1));
+			const params = qs.parse(window.location.search.substring(1));
 			const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+
+
 			dispatch(
 				setFilters({
 					...params,
 					sort,
-
 				})
-
 			);
-			isSearch.current = true;
+
+			isSearch.current = true; // Отмечаем, что фильтры были установлены
 		}
-	}, []);
+
+	}, [dispatch]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -57,18 +60,21 @@ const Home = () => {
 			fetchPizzas();
 		}
 		isSearch.current = false;
+
 	}, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
 	useEffect(() => {
-		const queryString = qs.stringify({
-			sortProperty: sort.sortProperty,
-			categoryId,
-			currentPage
-		})
+		if (isMounted.current) {
+			const queryString = qs.stringify({
+				sortProperty: sort.sortProperty,
+				categoryId,
+				currentPage,
+			});
+				navigate(`?${queryString}`);
+			}
+			isMounted.current = true;
 
-		navigate(`?${queryString}`);
-
-	},[categoryId, sort.sortProperty, currentPage]);
+	}, [categoryId, sort.sortProperty, currentPage]);
 	const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index}/>);
 	const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item} />);
 
