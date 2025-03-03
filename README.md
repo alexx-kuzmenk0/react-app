@@ -21,5 +21,5 @@ This application offers a seamless and delightful experience for pizza enthusias
 - **Explore the Pizza Catalog**
 - **Purchase with Ease**  
 
-### Indulge in the joy of pizza, made simpler than ever! 🍕
+### Indulge in the joy of pizza, made simpler than ever!🍕
 
